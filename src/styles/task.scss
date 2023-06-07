@@ -1,0 +1,75 @@
+@import './colors';
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+
+  .task {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 3px;
+    box-shadow: $shadow;
+    padding: 5px;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+
+      .author {
+        font-size: 0.9rem;
+        color: grey;
+      }
+
+      .title {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .date {
+        font-size: 0.75rem;
+        background: #FFD796;
+        text-align: center;
+        width: 100px;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 0.3rem;
+
+      .comments {
+        display: flex;
+        align-items: baseline;
+      }
+
+      .files {
+        display: flex;
+        align-items: baseline;
+      }
+    }
+  }
+
+
+  .info {
+
+  }
+
+  .buttons {
+    * {
+      color: grey;
+      font-size: 0.75rem;
+      button {
+        padding: 0;
+        margin: 0;
+        background: none;
+        box-shadow: none;
+        svg {
+          width: 75%;
+        }
+      }
+    }
+  }
+}

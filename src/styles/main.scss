@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+@import "bootstrap/scss/bootstrap";
+@import './colors';
+
+body {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.015rem;
+}
+
+.categories {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: stretch;
+}
+
+button {
+  gap: 1rem;
+  border: 0;
+  background: $grey;
+  font-size: 1rem;
+  border-radius: 3px;
+  box-shadow: $shadow;
+}
