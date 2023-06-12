@@ -3,7 +3,7 @@ import '../styles/task.scss'
 import {CommentIcon, FileIcon} from "./Icons";
 
 function parseDate(date) {
-    const monthNames = ["Январа", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+    const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
         "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
     ];
 

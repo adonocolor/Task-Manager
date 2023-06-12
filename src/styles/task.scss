@@ -1,14 +1,21 @@
 @import './colors';
 
 .tasks {
+  transition: background .2s ease-in-out;
   display: flex;
   flex-direction: column;
 
-  :hover {
-    background: $hover;
-  }
-
   .task {
+    transition: background .2s ease-in-out;
+
+    &:hover {
+      background: $hover;
+    }
+
+    &:active {
+      background: none;
+    }
+
     border: 1px lightgrey solid;
     margin: 5px;
     display: flex;
@@ -36,7 +43,8 @@
       .date {
         font-size: 0.75rem;
         text-align: center;
-        width: 120px;
+        width: fit-content;
+        padding: 1px 6px 1px 6px;
       }
     }
 

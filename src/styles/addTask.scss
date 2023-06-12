@@ -1,0 +1,103 @@
+@import './colors';
+
+
+
+.addTask {
+  background: white;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 2vh;
+  right: 2vh;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    padding: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-width: 1px 1px 0 1px;
+    border-color: $grey;
+    border-style: solid;
+
+    p {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    button {
+      background: none;
+
+      svg {
+        background: none;
+        transition: all .2s ease-in-out;
+      }
+
+      svg:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+
+  .sendIt {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+    border-width: 0 1px 1px 1px;
+    border-color: $grey;
+    border-style: solid;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid $grey;
+    padding: 5px;
+
+    input.comment {
+      resize: vertical;
+    }
+
+    fieldset {
+      border: none;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        padding: 1px;
+        font-size: 0.75rem;
+      }
+
+      input, select, textarea {
+        padding: 4px;
+        border-width: 1px;
+        border-color: $grey;
+        border-style: solid;
+        font-size: 0.75rem;
+        background: none;
+        color: grey;
+      }
+    }
+  }
+
+  .sendIt {
+    button {
+      padding: 4px;
+      font-size: 0.75rem;
+      border-radius: 1px;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.025);
+      }
+    }
+  }
+}

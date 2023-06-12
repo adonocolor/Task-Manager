@@ -23,21 +23,36 @@ button {
   box-shadow: none;
 }
 
-.addButton {
+.addButtonCtr {
   position: sticky;
-  bottom: 3vh;
-  left: 97vw;
-  background: none;
+  bottom: 0;
+  right: 0;
+}
+
+.addButton {
+  position: absolute;
+  bottom: 2vh;
+  right: 2vh;
+  padding: 5px;
+  border-radius: 5px;
+  background: $grey;
   max-width: 64px;
   max-height: 64px;
+  transition: box-shadow .2s ease-in-out;
 
   svg {
+    background: none;
+    transition: transform .2s ease-in-out;
     color: grey;
     width: 32px;
     height: 32px;
   }
 
-  :hover {
-    background: $hover;
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+
+  svg:hover {
+    transform: scale(1.1);
   }
 }
