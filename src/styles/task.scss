@@ -4,13 +4,18 @@
   display: flex;
   flex-direction: column;
 
+  :hover {
+    background: $hover;
+  }
+
   .task {
+    border: 1px lightgrey solid;
     margin: 5px;
     display: flex;
     justify-content: space-between;
-    border-radius: 3px;
-    box-shadow: $shadow;
-    padding: 5px;
+    border-radius: 1px;
+    box-shadow: none;
+    padding: 12px;
 
     .info {
       display: flex;
@@ -22,15 +27,16 @@
       }
 
       .title {
+        word-break: break-word;
+        max-width: 240px;
         font-size: 1rem;
         font-weight: 600;
       }
 
       .date {
         font-size: 0.75rem;
-        background: #FFD796;
         text-align: center;
-        width: 100px;
+        width: 120px;
       }
     }
 
@@ -66,6 +72,7 @@
         margin: 0;
         background: none;
         box-shadow: none;
+
         svg {
           width: 75%;
         }

@@ -20,5 +20,24 @@ button {
   background: $grey;
   font-size: 1rem;
   border-radius: 3px;
-  box-shadow: $shadow;
+  box-shadow: none;
+}
+
+.addButton {
+  position: sticky;
+  bottom: 3vh;
+  left: 97vw;
+  background: none;
+  max-width: 64px;
+  max-height: 64px;
+
+  svg {
+    color: grey;
+    width: 32px;
+    height: 32px;
+  }
+
+  :hover {
+    background: $hover;
+  }
 }

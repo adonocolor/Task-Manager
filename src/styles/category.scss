@@ -3,7 +3,7 @@
 .category {
   border-radius: 3px;
   min-width: 350px;
-  box-shadow: $shadow;
+  box-shadow: none;
   display: flex;
   align-items: stretch;
   justify-content: flex-start;
@@ -11,27 +11,11 @@
 
   .header {
     margin: 5px;
-    border-radius: 3px;
-    box-shadow: $shadow;
+    border-radius: 1px;
+    box-shadow: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    &#Failed {
-      background: $failed;
-    }
-
-    &#Awaiting {
-      background: $awaiting
-    }
-
-    &#Running {
-      background: $running
-    }
-
-    &#Succeed {
-      background: $succeed
-    }
 
     .title {
       font-size: 1rem;
@@ -61,10 +45,10 @@
       button {
         gap: 1rem;
         border: 0;
-        background: $grey;
+        background: none;
         font-size: 1rem;
         border-radius: 3px;
-        box-shadow: $shadow;
+        box-shadow: none;
       }
    }
   }
