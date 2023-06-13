@@ -3,6 +3,10 @@ import '../styles/task.scss'
 import {CommentIcon, FileIcon} from "./Icons";
 
 function parseDate(date) {
+    if (date === null) {
+        return 'Без срока'
+    }
+
     const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
         "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
     ];
@@ -12,9 +16,6 @@ function parseDate(date) {
     const day = date.getDay()
     const month = date.getMonth()
 
-    if (date === null) {
-        return 'Без срока'
-    }
 
     return `${day} ${monthNames[month]}, ${hour}:${minute}`
 }

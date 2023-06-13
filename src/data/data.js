@@ -21,7 +21,7 @@ export const tasks = [
     {id: 7, title: 'Send Konami a letter', author: employees[1], date: new Date("2023-06-30T14:48:00"), status: taskStatus[3]},
     {id: 8, title: 'Send Konami a letter', author: employees[1], date: new Date("2023-06-30T14:48:00"), status: taskStatus[3]},
     {id: 9, title: 'Send Konami a letter', author: employees[1], date: new Date("2023-06-30T14:48:00"), status: taskStatus[3]},
-    {id: 10, title: 'Send Konami a letter', author: employees[1], date: new Date("2023-06-30T14:48:00"), status: taskStatus[3]},
+    {id: 10, title: 'Send Konami a letter', author: employees[1], date: null, status: taskStatus[3]},
     {id: 11, title: 'Send Konami a letter', author: employees[1], date: new Date("2023-06-30T14:48:00"), status: taskStatus[3]},
     {id: 12, title: 'Send Konami a letter', author: employees[1], date: new Date("2023-06-30T14:48:00"), status: taskStatus[3]},
     {id: 13, title: 'Send Konami a letter', author: employees[1], date: new Date("2023-06-30T14:48:00"), status: taskStatus[3]},
