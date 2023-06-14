@@ -1,8 +1,7 @@
 import React, {Component} from "react";
-import '../styles/main.scss'
-import '../data/data.js'
-import {AddTaskButton} from "./AddTaskButton";
+import {AddTaskModal} from "./AddTaskModal";
 import {Board} from "./Board";
+import {UpdateTaskForm} from "./Forms/Task/UpdateTaskForm";
 
 
 
@@ -11,7 +10,8 @@ class App extends Component {
         return (
             <>
                 <Board />
-                <AddTaskButton />
+                <UpdateTaskForm />
+                <AddTaskModal />
             </>
         )
     }

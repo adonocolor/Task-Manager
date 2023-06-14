@@ -1,0 +1,77 @@
+@import './colors';
+
+.updateFormContainer {
+  position: relative;
+  z-index: 1000;
+  bottom: 6px;
+  width: 350px;
+
+  .arrowUp {
+    width: 0;
+    height: 0;
+    border-top: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid $grey;
+    margin-left: 10px;
+    margin-bottom: 0;
+    position: relative;
+    top: 1px;
+  }
+
+  .updateTask {
+    box-shadow: $shadow;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-color: $grey;
+    border-width: 1px;
+    border-radius: 3px;
+    margin: 0 5px 5px 5px;
+    padding: 16px 20px 16px 20px;
+
+    .header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 16px;
+
+      p {
+        font-weight: 600;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      button {
+        background: none;
+
+        svg {
+          background: none;
+          transition: all .2s ease-in-out;
+        }
+
+        svg:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .categoryIcon {
+      width: 0.75rem;
+      height: 0.75rem;
+      margin-right: 5px;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 2px;
+      border-color: $transparentBlack;
+    }
+
+    .catField {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

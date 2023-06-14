@@ -1,5 +1,11 @@
 @import './colors';
 
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .tasks {
   transition: background .2s ease-in-out;
   display: flex;
