@@ -5,15 +5,13 @@ import {CrossIcon} from "../../Icons";
 import { Form, TagPicker, DatePicker, InputPicker} from "rsuite";
 import '../../../styles/rsuite.scss'
 
-const data = employees.map((employee) => {
-    return ({label: employee.name, value: employee.id})
-})
 
 const categories = taskStatus.map((task) => {
-    return ({label: task.title, value: task.title, color: task.color})
+    return ({label: task.title, value: task.id, color: task.color})
 })
 
-export const UpdateTaskForm = ({open, onClose, title}) => {
+
+export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => {
     if (!open) return null
     else
         return (
@@ -30,34 +28,18 @@ export const UpdateTaskForm = ({open, onClose, title}) => {
                         <div className='form'>
                             <Form.Group>
                                 <Form.ControlLabel>Исполнители</Form.ControlLabel>
-                                <TagPicker style={{fontSize: "0.75rem"}} data={data} />
+                                <TagPicker defaultValue={author.map(item => item.id)} style={{fontSize: "0.75rem"}} data={employees} labelKey="name" valueKey="id" />
                             </Form.Group>
                             <Form.Group>
                                 <Form.ControlLabel>Крайний срок</Form.ControlLabel>
-                                <DatePicker/>
+                                <DatePicker defaultValue={date}/>
                             </Form.Group>
                             <Form.Group>
                                 <Form.ControlLabel>Категория</Form.ControlLabel>
                                 <InputPicker
                                     data={categories}
                                     placeholder="Выберите категорию"
-
-                                    renderMenuItem={(label, item) => {
-                                        return (
-                                            <div>
-                                                <i className="rs-icon rs-icon-user"/> {label}
-                                            </div>
-                                        );
-                                    }}
-
-                                    renderMenuGroup={(label, item) => {
-                                        return (
-                                            <div>
-                                                <i className="rs-icon rs-icon-group"/> {label} - ({item.children.length})
-                                            </div>
-                                        );
-                                    }}
-
+                                    defaultValue={status.id}
                                     renderValue={(value, item, selectedElement) => {
                                         const {color} = item
                                         return (
@@ -65,7 +47,7 @@ export const UpdateTaskForm = ({open, onClose, title}) => {
                                               <span>
                                                 <div className="categoryIcon" style={{background: color}}/>
                                               </span>{' '}
-                                                {value}
+                                                {item.label}
                                             </div>
                                         );
                                     }}

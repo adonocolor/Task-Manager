@@ -30,7 +30,7 @@ function parseAuthors(author) {
 }
 
 
-export const Task = ({title, author, date, color}) => {
+export const Task = ({title, author, date, status, color}) => {
     const [updateTaskModal, setUpdateTask] = useState(false)
     return (
         <div className='taskContainer'>
@@ -56,7 +56,7 @@ export const Task = ({title, author, date, color}) => {
             </span>
                 </div>
             </article>
-            <UpdateTaskForm title={title} open={updateTaskModal} onClose={() => setUpdateTask(false)}/>
+            <UpdateTaskForm author={author} status={status} date={date} title={title} open={updateTaskModal} onClose={() => setUpdateTask(false)}/>
         </div>
     );
 };
