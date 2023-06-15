@@ -21,6 +21,14 @@ function parseDate(date) {
     return `${day} ${monthNames[month]}, ${hour}:${minute}`
 }
 
+function parseAuthors(author) {
+    if (author.length === 1) {
+        return `${author[0].name}`
+    } else {
+        return `${author[0].name} и еще ${author.length - 1}`
+    }
+}
+
 
 export const Task = ({title, author, date, color}) => {
     const [updateTaskModal, setUpdateTask] = useState(false)
@@ -30,7 +38,7 @@ export const Task = ({title, author, date, color}) => {
                 <div className='info'>
                     <h2 className="title">{title}</h2>
                     <p className='date' style={{background: color}}>{parseDate(date)}</p>
-                    <p className="author">{author.name}</p>
+                    <p className="author">{parseAuthors(author)}</p>
                 </div>
 
                 <div className='buttons'>
