@@ -1,16 +1,23 @@
 @import './colors';
 
+#addTaskPortal {
+  position: relative;
+  z-index: 100;
+}
+
 
 
 .addTask {
   background: white;
   border-radius: 3px;
-  position: absolute;
+  position: relative;
+  z-index: 5;
   bottom: 2vh;
   right: 2vh;
   width: 300px;
   display: flex;
   flex-direction: column;
+  margin: 0;
 
 
   .header {

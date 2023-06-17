@@ -1,9 +1,10 @@
 @import './colors';
 
 .updateFormContainer {
-  position: relative;
-  bottom: 6px;
+  position: absolute;
+  z-index: 3;
   width: 350px;
+  top: calc(100% - 1px);
 
   .arrowUp {
     width: 0;
@@ -19,13 +20,14 @@
   }
 
   .updateTask {
+    background: white;
     box-shadow: $shadow;
     display: flex;
     flex-direction: column;
     border-style: solid;
     border-color: $grey;
     border-width: 1px;
-    border-radius: 3px;
+    border-radius: 1px;
     margin: 0 5px 5px 5px;
     padding: 16px 20px 16px 20px;
 

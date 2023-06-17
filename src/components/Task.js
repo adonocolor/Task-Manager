@@ -14,7 +14,7 @@ function parseDate(date) {
 
     const minute = date.getMinutes()
     const hour = date.getHours()
-    const day = date.getDay()
+    const day = date.getDate()
     const month = date.getMonth()
 
 
@@ -32,31 +32,34 @@ function parseAuthors(author) {
 
 export const Task = ({title, author, date, status, color}) => {
     const [updateTaskModal, setUpdateTask] = useState(false)
-    return (
-        <div className='taskContainer'>
-            <article className='task' onClick={() => setUpdateTask(true)}>
-                <div className='info'>
-                    <h2 className="title">{title}</h2>
-                    <p className='date' style={{background: color}}>{parseDate(date)}</p>
-                    <p className="author">{parseAuthors(author)}</p>
-                </div>
 
-                <div className='buttons'>
-                <span className="comments">
-                <button type="button">
-                    <CommentIcon />
-                </button>
-                <p>0</p>
-            </span>
-                    <span className="files">
-                <button type="button">
-                    <FileIcon />
-                </button>
-                <p>0</p>
-            </span>
-                </div>
-            </article>
-            <UpdateTaskForm author={author} status={status} date={date} title={title} open={updateTaskModal} onClose={() => setUpdateTask(false)}/>
-        </div>
+    return (
+        <>
+            <div className='taskContainer'>
+                <article className='task' onClick={() => setUpdateTask(true)}>
+                    <div className='info'>
+                        <h2 className="title">{title}</h2>
+                        <p className='date' style={{background: color}}>{parseDate(date)}</p>
+                        <p className="author">{parseAuthors(author)}</p>
+                    </div>
+
+                    <div className='buttons'>
+                    <span className="comments">
+                    <button type="button">
+                        <CommentIcon />
+                    </button>
+                    <p>0</p>
+                </span>
+                        <span className="files">
+                    <button type="button">
+                        <FileIcon />
+                    </button>
+                    <p>0</p>
+                </span>
+                    </div>
+                </article>
+                <UpdateTaskForm author={author} status={status} date={date} title={title} open={updateTaskModal} onClose={() => setUpdateTask(false)}/>
+            </div>
+        </>
     );
 };
