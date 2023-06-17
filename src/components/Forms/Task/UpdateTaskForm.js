@@ -1,21 +1,46 @@
 import React from "react";
-import {employees, taskStatus} from "../../../data/data";
-import '../../../styles/updateTask.scss'
 import {CrossIcon} from "../../Icons";
 import { Form, TagPicker, DatePicker, InputPicker} from "rsuite";
+import {employees, taskStatus} from "../../../data/data";
+import '../../../styles/updateTask.scss'
 import '../../../styles/rsuite.scss'
-
 
 const categories = taskStatus.map((task) => {
     return ({label: task.title, value: task.id, color: task.color})
 })
 
+const formGroupStyle = {
+    margin: 0,
+    padding: 0,
+}
+
 
 export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => {
-    if (!open) return null
-    else
+    if (!open)
+        return null
+    else {
+        const disabledTaskStatusOptions = (array, status) => {
+            let index = array.indexOf(status)
+            let enabled
+
+            if (index === 0 &&  typeof array[1] !== 'undefined') {
+                enabled = array.slice(0, 2)
+            }
+            if (index === 0 &&  typeof array[1] === 'undefined') {
+                enabled = status.id
+            }
+            if (index !== 0 &&  typeof array[index + 1] !== 'undefined') {
+                enabled = array.slice(index - 1, index + 2)
+            } else
+                enabled = array.slice(-2)
+
+            return array.filter(item => !enabled.includes(item)).map(item => item.id)
+        }
+
+        const disabledCategories = disabledTaskStatusOptions(taskStatus, status)
+
         return (
-            <div className='updateFormContainer'>
+            <div id="updateForm" className='updateFormContainer'>
                 <div className='arrowUp'></div>
                 <div className='updateTask'>
                     <div className='header'>
@@ -26,20 +51,29 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                     </div>
                     <Form>
                         <div className='form'>
-                            <Form.Group>
+                            <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Исполнители</Form.ControlLabel>
-                                <TagPicker defaultValue={author.map(item => item.id)} style={{fontSize: "0.75rem"}} data={employees} labelKey="name" valueKey="id" />
+                                <TagPicker defaultValue={author.map(item => item.id)} style={{fontSize: "0.75rem", width: "100%"}} data={employees} labelKey="name" valueKey="id" />
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Крайний срок</Form.ControlLabel>
-                                <DatePicker defaultValue={date}/>
+                                <DatePicker style={{fontSize: "0.75rem", width: "100%"}} defaultValue={date}/>
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Категория</Form.ControlLabel>
                                 <InputPicker
                                     data={categories}
                                     placeholder="Выберите категорию"
                                     defaultValue={status.id}
+                                    disabledItemValues={disabledCategories}
+                                    style={{fontSize: "0.75rem", width: "100%"}}
+                                    renderMenuItem={(label, item) => {
+                                        return (
+                                            <div style={{fontSize: "0.75rem", width: "100%"}}>
+                                                <i className="rs-icon rs-icon-user" /> {label}
+                                            </div>
+                                        );
+                                    }}
                                     renderValue={(value, item, selectedElement) => {
                                         const {color} = item
                                         return (
@@ -56,7 +90,7 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                         </div>
                     </Form>
                 </div>
-        </div>
-
+            </div>
         )
+    }
 }
