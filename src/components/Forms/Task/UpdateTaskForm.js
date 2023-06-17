@@ -53,7 +53,7 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                         <div className='form'>
                             <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Исполнители</Form.ControlLabel>
-                                <TagPicker defaultValue={author.map(item => item.id)} style={inputStyle} data={employees} labelKey="name" valueKey="id" />
+                                <TagPicker placeholder={'Выберите пользователей'} defaultValue={author.map(item => item.id)} style={inputStyle} data={employees} labelKey="name" valueKey="id" />
                             </Form.Group>
                             <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Крайний срок</Form.ControlLabel>
