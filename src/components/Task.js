@@ -3,7 +3,7 @@ import '../styles/task.scss'
 import {CommentIcon, FileIcon} from "./Icons";
 import {UpdateTaskForm} from "./Forms/Task/UpdateTaskForm";
 
-function parseDate(date) {
+export function parseDate(date) {
     if (date === null) {
         return 'Без срока'
     }

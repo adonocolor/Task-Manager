@@ -2,7 +2,7 @@
 
 #addTaskPortal {
   position: relative;
-  z-index: 100;
+  z-index: 3;
 }
 
 
@@ -31,7 +31,7 @@
 
 
     p {
-      font-size: 0.75rem;
+      font-size: 1rem;
       font-weight: 600;
     }
 
@@ -74,6 +74,20 @@
 
     input.comment {
       resize: vertical;
+    }
+
+    input.file {
+      font-size: 0.75rem;
+      width: 100%;
+    }
+
+    input &#file-upload-button {
+      font-size: 0.75rem;
+      width: 100%;
+      border-radius: 1px;
+      border-style: solid;
+      border-color: lightgrey;
+      margin: 2px;
     }
 
     fieldset {

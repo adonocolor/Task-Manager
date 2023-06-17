@@ -4,7 +4,7 @@
   position: absolute;
   z-index: 3;
   width: 350px;
-  top: calc(100% - 1px);
+  top: calc(100% + 10px);
 
   .arrowUp {
     width: 0;
@@ -12,20 +12,28 @@
     border-top: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 12px solid $grey;
+    border-bottom: 12px solid lightgrey;
     margin-left: 10px;
     margin-bottom: 0;
     position: relative;
     top: 1px;
   }
 
+  img {
+    height: 12px;
+    width: 24px;
+    position: absolute;
+    top: -10px;
+    margin-left: 10px;
+  }
+
   .updateTask {
     background: white;
-    box-shadow: $shadow;
+    box-shadow: $updateShadow;
     display: flex;
     flex-direction: column;
     border-style: solid;
-    border-color: $grey;
+    border-color: lightgrey;
     border-width: 1px;
     border-radius: 1px;
     margin: 0 5px 5px 5px;
@@ -35,7 +43,8 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding-bottom: 16px;
+      margin: 0 0 16px 0;
+      padding: 0;
 
       p {
         font-weight: 600;

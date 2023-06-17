@@ -2,8 +2,9 @@ import React from "react";
 import {employees} from "../../../data/data";
 import '../../../styles/addTask.scss'
 import {CrossIcon} from "../../Icons";
-import {Button, Input, ButtonToolbar, Form, TagPicker, DatePicker, Uploader} from "rsuite";
+import {Button, Input, ButtonToolbar, Form, TagPicker, DatePicker} from "rsuite";
 import '../../../styles/rsuite.scss'
+import {inputStyle, labelStyle} from "./rsuiteStyles";
 
 const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -25,24 +26,26 @@ export const AddTaskForm = ({open, onClose}) => {
             <Form>
                 <div className='form'>
                     <Form.Group style={{margin: 0, padding: 0}} >
-                        <Form.ControlLabel style={{fontSize: "0.75rem"}}>Название</Form.ControlLabel>
-                        <Input style={{fontSize: "0.75rem", width: "100%"}} placeholder='Название задачи'></Input>
+                        <Form.ControlLabel style={labelStyle}>Название</Form.ControlLabel>
+                        <Input style={inputStyle} placeholder='Название задачи'></Input>
                     </Form.Group>
                     <Form.Group style={{margin: 0, padding: 0}} >
-                        <Form.ControlLabel style={{fontSize: "0.75rem"}}>Исполнители</Form.ControlLabel>
-                        <TagPicker style={{fontSize: "0.75rem", width: "100%"}} data={data} />
+                        <Form.ControlLabel style={labelStyle}>Исполнители</Form.ControlLabel>
+                        <TagPicker placeholder={'Выберите пользователей'} style={inputStyle} data={data} />
                     </Form.Group>
                     <Form.Group style={{margin: 0, padding: 0}} >
-                        <Form.ControlLabel style={{fontSize: "0.75rem"}}>Крайний срок</Form.ControlLabel>
-                        <DatePicker />
+                        <Form.ControlLabel style={labelStyle}>Крайний срок</Form.ControlLabel>
+                        <DatePicker format={"dd.MM.yyyy"} placeholder={'дд.мм.гггг'}/>
                     </Form.Group>
                     <Form.Group style={{margin: 0, padding: 0}} >
-                        <Form.ControlLabel style={{fontSize: "0.75rem"}}>Добавить файл</Form.ControlLabel>
-                        <Uploader style={{fontSize: "0.75rem", width: "100%"}}  action="//jsonplaceholder.typicode.com/posts/" />
+                        <Form.ControlLabel style={labelStyle}>Добавить файл</Form.ControlLabel>
+                        <div className='rs-input fileCont'>
+                            <input type='file' className='file'/>
+                        </div>
                     </Form.Group>
                     <Form.Group controlId="textarea-1" style={{height: "100%", margin: 0, padding: 0}}>
-                        <Form.ControlLabel style={{fontSize: "0.75rem"}}>Комментарий</Form.ControlLabel>
-                        <Form.Control className='comment' placeholder='Введите комментарий' rows={2} name="textarea" style={{width: "100%",  maxHeight: 100 }} accepter={Textarea} />
+                        <Form.ControlLabel style={labelStyle}>Комментарий</Form.ControlLabel>
+                        <Form.Control className='comment' placeholder='Введите комментарий' rows={2} name="textarea" style={{width: "100%",  maxHeight: 100, fontSize: "0.75rem", borderRadius: "1px" }} accepter={Textarea} />
                     </Form.Group>
                 </div>
                 <div className='sendIt'>

@@ -4,15 +4,15 @@ import { Form, TagPicker, DatePicker, InputPicker} from "rsuite";
 import {employees, taskStatus} from "../../../data/data";
 import '../../../styles/updateTask.scss'
 import '../../../styles/rsuite.scss'
+import '../../../data/data'
+import {inputStyle, formGroupStyle} from "./rsuiteStyles";
+import {parseDate} from "../../Task";
+import Arrow from '../../../svg/arrowIcon.svg';
+
 
 const categories = taskStatus.map((task) => {
     return ({label: task.title, value: task.id, color: task.color})
 })
-
-const formGroupStyle = {
-    margin: 0,
-    padding: 0,
-}
 
 
 export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => {
@@ -41,7 +41,7 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
 
         return (
             <div id="updateForm" className='updateFormContainer'>
-                <div className='arrowUp'></div>
+                    <img src={Arrow} alt='arrowIcon'/>
                 <div className='updateTask'>
                     <div className='header'>
                         <p>{title}</p>
@@ -53,20 +53,37 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                         <div className='form'>
                             <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Исполнители</Form.ControlLabel>
-                                <TagPicker defaultValue={author.map(item => item.id)} style={{fontSize: "0.75rem", width: "100%"}} data={employees} labelKey="name" valueKey="id" />
+                                <TagPicker defaultValue={author.map(item => item.id)} style={inputStyle} data={employees} labelKey="name" valueKey="id" />
                             </Form.Group>
                             <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Крайний срок</Form.ControlLabel>
-                                <DatePicker style={{fontSize: "0.75rem", width: "100%"}} defaultValue={date}/>
+                                <DatePicker type="date" format="yyyy.MM.dd HH:mm" style={inputStyle} locale={{
+                                    sunday: 'Вс',
+                                    monday: 'Пн',
+                                    tuesday: 'Вт',
+                                    wednesday: 'Ср',
+                                    thursday: 'Чт',
+                                    friday: 'Пт',
+                                    saturday: 'Сб',
+                                    ok: 'OK',
+                                    today: 'Сегодня',
+                                    yesterday: 'Вчера',
+                                    hours: 'Часов',
+                                    minutes: 'Минут',
+                                    seconds: 'Секунд'
+                                }}
+                                            placeholder={'гггг.мм.дд ЧЧ:мм'}
+                                            renderValue={(date) => parseDate(date)}
+                                            defaultValue={date} />
                             </Form.Group>
                             <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Категория</Form.ControlLabel>
                                 <InputPicker
+                                    style={inputStyle}
                                     data={categories}
                                     placeholder="Выберите категорию"
                                     defaultValue={status.id}
                                     disabledItemValues={disabledCategories}
-                                    style={{fontSize: "0.75rem", width: "100%"}}
                                     renderMenuItem={(label, item) => {
                                         return (
                                             <div style={{fontSize: "0.75rem", width: "100%"}}>
