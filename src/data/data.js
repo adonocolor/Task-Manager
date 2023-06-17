@@ -12,7 +12,7 @@ export const employees = [
 ]
 
 export const tasks = [
-    {id: 1, title: 'Me', author: [employees[3]], date: new Date("2023-09-30T14:48:00"), status: taskStatus[0]},
+    {id: 1, title: 'Me', author: [employees[3]], date: new Date("December 17, 2023 03:24:00"), status: taskStatus[0]},
     {id: 2, title: 'Post a beer pic on Insta', author: [employees[1]], date: new Date("2023-06-30T14:48:00"), status: taskStatus[1]},
     {id: 3, title: 'Not attend BLAST.TV', author: [employees[0]], date: new Date("2023-06-30T14:48:00"), status: taskStatus[1]},
     {id: 4, title: 'Delete circled menu in CS2', author: [employees[0]], date: new Date("2023-06-30T14:48:00"), status: taskStatus[2]},
