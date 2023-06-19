@@ -14,31 +14,30 @@ const categories = taskStatus.map((task) => {
     return ({label: task.title, value: task.id, color: task.color})
 })
 
+const disabledTaskStatusOptions = (array, status) => {
+    let index = array.indexOf(status)
+    let enabled
+
+    if (index === 0 &&  typeof array[1] !== 'undefined') {
+        enabled = array.slice(0, 2)
+    }
+    if (index === 0 &&  typeof array[1] === 'undefined') {
+        enabled = status.id
+    }
+    if (index !== 0 &&  typeof array[index + 1] !== 'undefined') {
+        enabled = array.slice(index - 1, index + 2)
+    } else
+        enabled = array.slice(-2)
+
+    return array.filter(item => !enabled.includes(item)).map(item => item.id)
+}
+
 
 export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => {
     if (!open)
         return null
     else {
-        const disabledTaskStatusOptions = (array, status) => {
-            let index = array.indexOf(status)
-            let enabled
-
-            if (index === 0 &&  typeof array[1] !== 'undefined') {
-                enabled = array.slice(0, 2)
-            }
-            if (index === 0 &&  typeof array[1] === 'undefined') {
-                enabled = status.id
-            }
-            if (index !== 0 &&  typeof array[index + 1] !== 'undefined') {
-                enabled = array.slice(index - 1, index + 2)
-            } else
-                enabled = array.slice(-2)
-
-            return array.filter(item => !enabled.includes(item)).map(item => item.id)
-        }
-
         const disabledCategories = disabledTaskStatusOptions(taskStatus, status)
-
         return (
             <div id="updateForm" className='updateFormContainer'>
                     <img src={Arrow} alt='arrowIcon'/>
@@ -57,7 +56,7 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                             </Form.Group>
                             <Form.Group style={formGroupStyle}>
                                 <Form.ControlLabel>Крайний срок</Form.ControlLabel>
-                                <DatePicker type="date" format="yyyy.MM.dd HH:mm" style={inputStyle} locale={{
+                                <DatePicker format="yyyy.MM.dd HH:mm" style={inputStyle} locale={{
                                     sunday: 'Вс',
                                     monday: 'Пн',
                                     tuesday: 'Вт',
