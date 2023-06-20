@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef, useState} from "react";
 import {CrossIcon} from "../../Icons";
 import { Form, TagPicker, DatePicker, InputPicker} from "rsuite";
 import {employees, taskStatus} from "../../../data/data";
@@ -8,7 +8,6 @@ import '../../../data/data'
 import {inputStyle, formGroupStyle} from "./rsuiteStyles";
 import {parseDate} from "../../Task";
 import Arrow from '../../../svg/arrowIcon.svg';
-
 
 const categories = taskStatus.map((task) => {
     return ({label: task.title, value: task.id, color: task.color})
@@ -38,25 +37,43 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
         return null
     else {
         const disabledCategories = disabledTaskStatusOptions(taskStatus, status)
+
+        const formRef = useRef();
+
+        const [formData, setFormData] = useState({
+            authors: author.map(item => item.id),
+            date: date,
+            categories: status.id,
+        });
+
+        const handleSubmit = () => {
+            if (!formRef.current.check()) {
+                return;
+            }
+
+            console.log(formData)
+            onClose()
+        }
+
         return (
             <div id="updateForm" className='updateFormContainer'>
                     <img src={Arrow} alt='arrowIcon'/>
                 <div className='updateTask'>
                     <div className='header'>
                         <p>{title}</p>
-                        <button className='closeFormButton' onClick={onClose}>
+                        <button className='closeFormButton' onClick={handleSubmit}>
                             <CrossIcon />
                         </button>
                     </div>
-                    <Form>
+                    <Form ref={formRef} onChange={setFormData}>
                         <div className='form'>
-                            <Form.Group style={formGroupStyle}>
+                            <Form.Group controlId='authors' style={formGroupStyle}>
                                 <Form.ControlLabel>Исполнители</Form.ControlLabel>
-                                <TagPicker placeholder={'Выберите пользователей'} defaultValue={author.map(item => item.id)} style={inputStyle} data={employees} labelKey="name" valueKey="id" />
+                                <Form.Control accepter={TagPicker} defaultValue={author.map(item => item.id)} name="authors" placeholder={'Выберите пользователей'} style={inputStyle} data={employees} labelKey="name" valueKey="id" />
                             </Form.Group>
-                            <Form.Group style={formGroupStyle}>
+                            <Form.Group controlId='date' style={formGroupStyle}>
                                 <Form.ControlLabel>Крайний срок</Form.ControlLabel>
-                                <DatePicker format="yyyy.MM.dd HH:mm" style={inputStyle} locale={{
+                                <Form.Control accepter={DatePicker} name="date" format="yyyy.MM.dd HH:mm" style={inputStyle} locale={{
                                     sunday: 'Вс',
                                     monday: 'Пн',
                                     tuesday: 'Вт',
@@ -75,9 +92,9 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                                             renderValue={(date) => parseDate(date)}
                                             defaultValue={date} />
                             </Form.Group>
-                            <Form.Group style={formGroupStyle}>
+                            <Form.Group controlId='categories' style={formGroupStyle}>
                                 <Form.ControlLabel>Категория</Form.ControlLabel>
-                                <InputPicker
+                                <Form.Control accepter={InputPicker} name="categories"
                                     style={inputStyle}
                                     data={categories}
                                     placeholder="Выберите категорию"
