@@ -6,6 +6,8 @@ import {Button, Input, ButtonToolbar, Form, TagPicker, DatePicker, Uploader} fro
 import '../../../styles/rsuite.scss'
 import {inputStyle, labelStyle} from "./rsuiteStyles";
 import {ArrayType, SchemaModel, StringType} from "schema-typed";
+import {useDispatch} from "react-redux";
+import {addTask} from "../../../redux/features/categorySlice";
 
 const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -16,6 +18,7 @@ const data = employees.map((employee) => {
 export const AddTaskForm = ({open, onClose}) => {
     if (!open) return null
     else {
+        const dispatch = useDispatch()
         const formRef = useRef();
         const [formData, setFormData] = useState({
             title: undefined,
@@ -28,7 +31,8 @@ export const AddTaskForm = ({open, onClose}) => {
             if(!formRef.current.check()) {
                 return;
             }
-            console.log(formData)
+
+            dispatch(addTask(formData))
         }
 
         const model = SchemaModel({

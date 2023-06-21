@@ -8,13 +8,12 @@ import '../../../data/data'
 import {inputStyle, formGroupStyle} from "./rsuiteStyles";
 import {parseDate} from "../../Task";
 import Arrow from '../../../svg/arrowIcon.svg';
-
-const categories = taskStatus.map((task) => {
-    return ({label: task.title, value: task.id, color: task.color})
-})
+import {useDispatch, useSelector} from "react-redux";
+import {updateTask} from "../../../redux/features/categorySlice";
 
 const disabledTaskStatusOptions = (array, status) => {
-    let index = array.indexOf(status)
+    const found = array.find(item => item.id === status)
+    let index = array.indexOf(found)
     let enabled
 
     if (index === 0 &&  typeof array[1] !== 'undefined') {
@@ -28,30 +27,36 @@ const disabledTaskStatusOptions = (array, status) => {
     } else
         enabled = array.slice(-2)
 
-    return array.filter(item => !enabled.includes(item)).map(item => item.id)
+    return array.filter(item => enabled.includes(item)).map(item => item.id)
 }
 
 
-export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => {
+export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId, id}) => {
     if (!open)
         return null
     else {
-        const disabledCategories = disabledTaskStatusOptions(taskStatus, status)
+        const dispatch = useDispatch()
+        const taskStatus = useSelector((store) => store.categorySlice.allCategories);
+        const disabledCategories = disabledTaskStatusOptions(taskStatus, categoryId)
+        const categories = taskStatus.map((task) => {
+            return ({label: task.title, value: task.id, color: task.color})
+        })
 
         const formRef = useRef();
-
         const [formData, setFormData] = useState({
-            authors: author.map(item => item.id),
+            authors: authors.map(item => item.id),
             date: date,
-            categories: status.id,
+            categories: categoryId,
         });
-
-        const handleSubmit = () => {
+        const handleSubmit = (id) => {
             if (!formRef.current.check()) {
                 return;
             }
 
+            formData['id'] = id
+
             console.log(formData)
+
             onClose()
         }
 
@@ -61,7 +66,7 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                 <div className='updateTask'>
                     <div className='header'>
                         <p>{title}</p>
-                        <button className='closeFormButton' onClick={handleSubmit}>
+                        <button className='closeFormButton' onClick={() => handleSubmit(id)}>
                             <CrossIcon />
                         </button>
                     </div>
@@ -69,7 +74,7 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                         <div className='form'>
                             <Form.Group controlId='authors' style={formGroupStyle}>
                                 <Form.ControlLabel>Исполнители</Form.ControlLabel>
-                                <Form.Control accepter={TagPicker} defaultValue={author.map(item => item.id)} name="authors" placeholder={'Выберите пользователей'} style={inputStyle} data={employees} labelKey="name" valueKey="id" />
+                                <Form.Control accepter={TagPicker} defaultValue={authors} name="authors" placeholder={'Выберите пользователей'} style={inputStyle} data={employees} labelKey="name" valueKey="id" />
                             </Form.Group>
                             <Form.Group controlId='date' style={formGroupStyle}>
                                 <Form.ControlLabel>Крайний срок</Form.ControlLabel>
@@ -98,7 +103,7 @@ export const UpdateTaskForm = ({open, onClose, title, author, date, status}) => 
                                     style={inputStyle}
                                     data={categories}
                                     placeholder="Выберите категорию"
-                                    defaultValue={status.id}
+                                    defaultValue={categoryId}
                                     disabledItemValues={disabledCategories}
                                     renderMenuItem={(label, item) => {
                                         return (

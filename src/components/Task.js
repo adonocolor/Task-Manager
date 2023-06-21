@@ -2,9 +2,10 @@ import React, {useState} from "react";
 import '../styles/task.scss'
 import {CommentIcon, FileIcon} from "./Icons";
 import {UpdateTaskForm} from "./Forms/Task/UpdateTaskForm";
+import {employees} from "../data/data";
 
 export function parseDate(date) {
-    if (date === null) {
+    if (date === null || date === undefined) {
         return 'Без срока'
     }
 
@@ -16,21 +17,35 @@ export function parseDate(date) {
     const hour = date.getHours()
     const day = date.getDate()
     const month = date.getMonth()
-
-
-    return `${day} ${monthNames[month]}, ${hour}:${minute}`
+    const result = `${day} ${monthNames[month]}, ${hour}:${minute}`
+    return result
 }
 
-function parseAuthors(author) {
-    if (author.length === 1) {
-        return `${author[0].name}`
+function parseAuthors(authors) {
+    const newAuthors = employees.filter(author => authors.includes(author.id)).map(item => item.name)
+
+    if (newAuthors.length === 1) {
+        return `${newAuthors[0]}`
     } else {
-        return `${author[0].name} и еще ${author.length - 1}`
+        return `${newAuthors[0]} и еще ${authors.length - 1}`
     }
 }
 
+function checkComment(comment) {
+    if (comment === null || comment === undefined) {
+        return 0
+    } else
+        return 1
+}
 
-export const Task = ({title, author, date, status, color}) => {
+function checkFile(file) {
+    if (file === null || file === undefined) {
+        return 0
+    } else
+        return 1
+}
+
+export const Task = ({id, title, authors, date, categoryId, color, comment, file}) => {
     const [updateTaskModal, setUpdateTask] = useState(false)
 
     return (
@@ -40,7 +55,7 @@ export const Task = ({title, author, date, status, color}) => {
                     <div className='info'>
                         <h2 className="title">{title}</h2>
                         <p className='date' style={{background: color}}>{parseDate(date)}</p>
-                        <p className="author">{parseAuthors(author)}</p>
+                        <p className="author">{parseAuthors(authors)}</p>
                     </div>
 
                     <div className='buttons'>
@@ -48,17 +63,17 @@ export const Task = ({title, author, date, status, color}) => {
                     <button type="button">
                         <CommentIcon />
                     </button>
-                    <p>0</p>
+                    <p>{checkComment(comment)}</p>
                 </span>
                         <span className="files">
                     <button type="button">
                         <FileIcon />
                     </button>
-                    <p>0</p>
+                    <p>{checkFile(file)}</p>
                 </span>
                     </div>
                 </article>
-                <UpdateTaskForm author={author} status={status} date={date} title={title} open={updateTaskModal} onClose={() => setUpdateTask(false)}/>
+                <UpdateTaskForm id={id} categoryId={categoryId} authors={authors} date={date} title={title} open={updateTaskModal} onClose={() => setUpdateTask(false)}/>
             </div>
         </>
     );
