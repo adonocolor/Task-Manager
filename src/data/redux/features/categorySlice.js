@@ -66,6 +66,10 @@ const categorySlice = createSlice({
                 task['date'] = found.date
             }
 
+            if (task.date === null) {
+                task['date'] = undefined
+            }
+
             if (task.categories !== undefined) {
                 state.allCategories[categoryIndex].tasks.splice(taskIndex, 1)
                 const neededCategory = task.categories

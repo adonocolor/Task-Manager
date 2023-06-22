@@ -1,6 +1,6 @@
-import {AddIcon} from "./Icons";
+import {AddIcon} from "../Icons";
 import React, {useState} from "react";
-import {AddTaskForm} from "./Forms/Task/AddTaskForm";
+import {AddTaskForm} from "../Forms/AddTaskForm";
 import {createPortal} from "react-dom";
 
 export const AddTaskModal = () => {

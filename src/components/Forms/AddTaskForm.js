@@ -1,13 +1,13 @@
 import React, {useRef, useState} from "react";
-import {employees} from "../../../data/data";
-import '../../../styles/addTask.scss'
-import {CrossIcon} from "../../Icons";
+import {employees} from "../../data/data";
+import '../../styles/addTask.scss'
+import {CrossIcon} from "../Icons";
 import {Button, Input, ButtonToolbar, Form, TagPicker, DatePicker, Uploader} from "rsuite";
-import '../../../styles/rsuite.scss'
+import '../../styles/rsuite.scss'
 import {inputStyle, labelStyle} from "./rsuiteStyles";
 import {ArrayType, SchemaModel, StringType} from "schema-typed";
 import {useDispatch} from "react-redux";
-import {addTask} from "../../../redux/features/categorySlice";
+import {addTask} from "../../data/redux/features/categorySlice";
 
 const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -30,6 +30,10 @@ export const AddTaskForm = ({open, onClose}) => {
         const handleSubmit = () => {
             if(!formRef.current.check()) {
                 return;
+            }
+
+            if (formData.date !== undefined && formData.date !== null) {
+                formData.date = formData.date.toString()
             }
 
             dispatch(addTask(formData))

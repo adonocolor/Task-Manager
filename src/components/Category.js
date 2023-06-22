@@ -2,10 +2,9 @@ import React from "react";
 import {Task} from "./Task";
 import '../styles/category.scss'
 import '../data/data'
-import {tasks} from "../data/data";
 import {BucketIcon} from "./Icons";
 import {useDispatch} from "react-redux";
-import {removeLastTask} from "../redux/features/categorySlice";
+import {removeLastTask} from "../data/redux/features/categorySlice";
 
 export const Category = ({id, title, color, tasks}) => {
     const dispatch = useDispatch()

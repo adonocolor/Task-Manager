@@ -1,15 +1,15 @@
 import React, {useRef, useState} from "react";
-import {CrossIcon} from "../../Icons";
+import {CrossIcon} from "../Icons";
 import { Form, TagPicker, DatePicker, InputPicker} from "rsuite";
-import {employees} from "../../../data/data";
-import '../../../styles/updateTask.scss'
-import '../../../styles/rsuite.scss'
-import '../../../data/data'
+import {employees} from "../../data/data";
+import '../../styles/updateTask.scss'
+import '../../styles/rsuite.scss'
+import '../../data/data'
 import {inputStyle, formGroupStyle, renderCategoryItem, datePickerLocale} from "./rsuiteStyles";
-import {parseDate} from "../../Task";
-import Arrow from '../../../svg/arrowIcon.svg';
+import {parseDate} from "../Task";
+import Arrow from '../../styles/svg/arrowIcon.svg';
 import {useDispatch, useSelector} from "react-redux";
-import {updateTask} from "../../../redux/features/categorySlice";
+import {updateTask} from "../../data/redux/features/categorySlice";
 import {ArrayType, NumberType, SchemaModel} from "schema-typed";
 
 const disabledTaskStatusOptions = (array, status) => {
@@ -47,12 +47,20 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
         const categories = taskStatus.map((task) => {
             return ({label: task.title, value: task.id, color: task.color})
         })
+
+        let realDate
+        if (date !== undefined) {
+            realDate = new Date(date)
+        } else {
+            realDate = undefined
+        }
+
         const dispatch = useDispatch()
         const disabledCategories = disabledTaskStatusOptions(taskStatus, categoryId)
         const formRef = useRef();
         const [formData, setFormData] = useState({
             authors: authors,
-            date: date,
+            date: realDate,
             categories: categoryId,
         });
         const handleSubmit = (id) => {
@@ -62,6 +70,11 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
 
             formData['id'] = id
             formData['catId'] = categoryId
+
+            if (formData.date !== undefined && formData.date !== null) {
+                formData.date = formData.date.toString()
+            }
+
             dispatch(updateTask(formData))
             onClose()
         }
@@ -99,7 +112,7 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
                                               locale={datePickerLocale}
                                               placeholder={'гггг.мм.дд ЧЧ:мм'}
                                               renderValue={(date) => parseDate(date)}
-                                              defaultValue={date} />
+                                              defaultValue={realDate} />
                             </Form.Group>
                             <Form.Group controlId='categories' style={formGroupStyle}>
                                 <Form.ControlLabel>Категория</Form.ControlLabel>

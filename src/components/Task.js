@@ -1,20 +1,21 @@
 import React, {useState} from "react";
 import '../styles/task.scss'
 import {CommentIcon, FileIcon} from "./Icons";
-import {UpdateTaskForm} from "./Forms/Task/UpdateTaskForm";
+import {UpdateTaskForm} from "./Forms/UpdateTaskForm";
 import {employees} from "../data/data";
 
-export function parseDate(date) {
-    if (date === null || date === undefined) {
+export function parseDate(string) {
+    if (string === undefined) {
         return 'Без срока'
     }
+
+    const date = new Date(string)
 
     const monthNames = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
         "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
     ];
 
     let minute = date.getMinutes()
-
     if (minute < 10) {
         minute = '0' + minute
     }

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {AddTaskModal} from "./AddTaskModal";
+import {AddTaskModal} from "./Modals/AddTaskModal";
 import {Board} from "./Board";
 
 
