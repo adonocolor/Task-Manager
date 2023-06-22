@@ -13,15 +13,23 @@ export function parseDate(date) {
         "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
     ];
 
-    const minute = date.getMinutes()
+    let minute = date.getMinutes()
+
+    if (minute < 10) {
+        minute = '0' + minute
+    }
     const hour = date.getHours()
     const day = date.getDate()
     const month = date.getMonth()
-    const result = `${day} ${monthNames[month]}, ${hour}:${minute}`
-    return result
+    return `${day} ${monthNames[month]}, ${hour}:${minute}`
 }
 
 function parseAuthors(authors) {
+
+    if (authors === undefined) {
+        return 'no'
+    }
+
     const newAuthors = employees.filter(author => authors.includes(author.id)).map(item => item.name)
 
     if (newAuthors.length === 1) {

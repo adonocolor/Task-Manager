@@ -10,6 +10,7 @@ import {parseDate} from "../../Task";
 import Arrow from '../../../svg/arrowIcon.svg';
 import {useDispatch, useSelector} from "react-redux";
 import {updateTask} from "../../../redux/features/categorySlice";
+import {ArrayType, NumberType, SchemaModel} from "schema-typed";
 
 const disabledTaskStatusOptions = (array, status) => {
     const found = array.find(item => item.id === status)
@@ -17,8 +18,10 @@ const disabledTaskStatusOptions = (array, status) => {
     let enabled
 
     if (index === 0 &&  typeof array[1] !== 'undefined') {
-        enabled = array.slice(0, 2)
+        enabled = [array[0], array[1]]
+        return array.filter(item => !enabled.includes(item)).map(item => item.id)
     }
+
     if (index === 0 &&  typeof array[1] === 'undefined') {
         enabled = status.id
     }
@@ -27,13 +30,18 @@ const disabledTaskStatusOptions = (array, status) => {
     } else
         enabled = array.slice(-2)
 
-    return array.filter(item => enabled.includes(item)).map(item => item.id)
+    return array.filter(item => !enabled.includes(item)).map(item => item.id)
 }
 
 export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId, id}) => {
     if (!open)
         return null
     else {
+        const model = SchemaModel({
+            categories: NumberType().isRequired('У задачи должна быть категория!'),
+            authors: ArrayType().isRequired('У задачи должен быть хотя бы 1 исполнитель!'),
+        })
+
         const taskStatus = useSelector((store) => store.categorySlice.allCategories);
 
         const categories = taskStatus.map((task) => {
@@ -43,7 +51,7 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
         const disabledCategories = disabledTaskStatusOptions(taskStatus, categoryId)
         const formRef = useRef();
         const [formData, setFormData] = useState({
-            authors: authors.map(item => item.id),
+            authors: authors,
             date: date,
             categories: categoryId,
         });
@@ -54,7 +62,6 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
 
             formData['id'] = id
             formData['catId'] = categoryId
-            console.log(formData)
             dispatch(updateTask(formData))
             onClose()
         }
