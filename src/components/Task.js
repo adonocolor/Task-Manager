@@ -27,8 +27,8 @@ export function parseDate(string) {
 
 function parseAuthors(authors) {
 
-    if (authors === undefined) {
-        return 'no'
+    if (authors === undefined || authors.length === 0) {
+        return 'Без исполнителей'
     }
 
     const newAuthors = employees.filter(author => authors.includes(author.id)).map(item => item.name)

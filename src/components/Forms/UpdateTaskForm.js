@@ -10,7 +10,7 @@ import {parseDate} from "../Task";
 import Arrow from '../../styles/svg/arrowIcon.svg';
 import {useDispatch, useSelector} from "react-redux";
 import {updateTask} from "../../data/redux/features/categorySlice";
-import {ArrayType, NumberType, SchemaModel} from "schema-typed";
+import {NumberType, SchemaModel} from "schema-typed";
 
 const disabledTaskStatusOptions = (array, status) => {
     const found = array.find(item => item.id === status)
@@ -39,7 +39,6 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
     else {
         const model = SchemaModel({
             categories: NumberType().isRequired('У задачи должна быть категория!'),
-            authors: ArrayType().isRequired('У задачи должен быть хотя бы 1 исполнитель!'),
         })
 
         const taskStatus = useSelector((store) => store.categorySlice.allCategories);

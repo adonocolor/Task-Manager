@@ -27,7 +27,7 @@ const categorySlice = createSlice({
                 comment: payload.comment,
             }
 
-            if (task.title === null || task.authors.length === 0) {
+            if (task.title === null) {
                 return
             }
 
@@ -45,7 +45,7 @@ const categorySlice = createSlice({
         updateTask: (state, action) => {
             const task = action.payload
 
-            if (task.categories === null || (task.authors && task.authors.length === 0)) {
+            if (task.categories === null) {
                 return
             }
 

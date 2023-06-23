@@ -5,7 +5,7 @@ import {CrossIcon} from "../Icons";
 import {Button, Input, ButtonToolbar, Form, TagPicker, DatePicker, Uploader} from "rsuite";
 import '../../styles/rsuite.scss'
 import {inputStyle, labelStyle} from "./rsuiteStyles";
-import {ArrayType, SchemaModel, StringType} from "schema-typed";
+import {SchemaModel, StringType} from "schema-typed";
 import {useDispatch} from "react-redux";
 import {addTask} from "../../data/redux/features/categorySlice";
 
@@ -41,7 +41,6 @@ export const AddTaskForm = ({open, onClose}) => {
 
         const model = SchemaModel({
             title: StringType().isRequired('Напишите имя!'),
-            authors: ArrayType().isRequired('У задачи должен быть хотя бы 1 исполнитель!'),
         })
 
         return (
