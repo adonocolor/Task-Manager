@@ -1,3 +1,5 @@
+// noinspection BadExpressionStatementJS
+
 import React from "react";
 import {Task} from "./Task";
 import '../styles/category.scss'
@@ -5,10 +7,10 @@ import '../data/data'
 import {BucketIcon} from "./Icons";
 import {useDispatch} from "react-redux";
 import {removeLastTask} from "../data/redux/features/categorySlice";
+import {Draggable, Droppable} from "react-beautiful-dnd";
 
 export const Category = ({id, title, color, tasks}) => {
     const dispatch = useDispatch()
-
     return (
         <div className="category">
             <div className="header" style={{background: color}}>
@@ -23,16 +25,34 @@ export const Category = ({id, title, color, tasks}) => {
                     </button>
                 </div>
             </div>
-
-            <section className="tasks">
+            <Droppable droppableId={id} type={"tasks"}>
                 {
-                    tasks.map(task => {
+                    (provided) => {
                         return (
-                            <Task {...task} color={color} categoryId={id} key={task.id} />
-                        )
-                    })
-                }
-            </section>
+                            <section {...provided.droppableProps}
+                                     ref={provided.innerRef}
+                                     className="tasks">
+                                {
+                                    tasks.map((task, index) => {
+                                        return (
+                                            <Draggable draggableId={task.id} index={index} key={task.id}>
+                                                {
+                                                    (provided) => {
+                                                        return (
+                                                            <div {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
+                                                                <Task {...task} key={task.id} color={color} categoryId={id} />
+                                                            </div>
+                                                            )
+                                                    }
+                                                }
+                                            </Draggable>
+                                        )
+                                    })
+                                }
+                            </section>
+                            )
+                }}
+            </Droppable>
         </div>
     );
 };

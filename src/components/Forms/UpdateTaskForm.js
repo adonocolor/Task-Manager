@@ -70,6 +70,8 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
             formData['id'] = id
             formData['catId'] = categoryId
 
+            console.log(formData)
+
             if (formData.date !== undefined && formData.date !== null) {
                 formData.date = formData.date.toString()
             }

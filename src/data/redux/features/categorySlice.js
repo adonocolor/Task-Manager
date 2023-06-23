@@ -3,10 +3,10 @@ import * as uuid from "uuid";
 
 const initialState = {
     allCategories: [
-        {id: 0, title: 'Неразобранные задачи', color: '#FF6347', tasks: []},
-        {id: 1, title: 'В планах', color: '#FE989B', tasks: []},
-        {id: 2, title: 'В работе', color: '#9FBAEF', tasks: []},
-        {id: 3, title: 'Выполнено', color: '#FFD796', tasks: []}
+        {id: uuid.v4(), title: 'Неразобранные задачи', color: '#FF6347', tasks: []},
+        {id: uuid.v4(), title: 'В планах', color: '#FE989B', tasks: []},
+        {id: uuid.v4(), title: 'В работе', color: '#9FBAEF', tasks: []},
+        {id: uuid.v4(), title: 'Выполнено', color: '#FFD796', tasks: []}
     ]
 }
 
@@ -16,10 +16,9 @@ const categorySlice = createSlice({
     reducers: {
         addTask: (state, action) => {
             const payload = action.payload
-            const id = uuid.v4()
 
             const task= {
-                id: id,
+                id: uuid.v4(),
                 title: payload.title,
                 authors: payload.authors,
                 date: payload.date,
@@ -72,7 +71,7 @@ const categorySlice = createSlice({
 
             if (task.categories !== undefined) {
                 state.allCategories[categoryIndex].tasks.splice(taskIndex, 1)
-                const neededCategory = task.categories
+                const neededCategory = state.allCategories.indexOf(state.allCategories.find(item => item.id === task.categories))
                 delete task.categories
                 state.allCategories[neededCategory].tasks.push(task)
             } else {
