@@ -77,9 +77,25 @@ const categorySlice = createSlice({
             } else {
                 state.allCategories[categoryIndex].tasks[taskIndex] = task
             }
+        },
+        dragTask: (state, action) => {
+            const {source, destination, type} = action.payload
+            let categories = state.allCategories
+
+            if (!destination) return;
+            if (source.droppableId === destination.droppableId && source.index === destination.index) return;
+
+            let sourceCatIndex = categories.indexOf(categories.find(element => element.id === source.droppableId))
+            let destinationCatIndex = categories.indexOf(categories.find(element => element.id === destination.droppableId))
+            if (type === 'tasks') {
+                if (Math.abs(sourceCatIndex - destinationCatIndex) > 1) return
+                let task = categories[sourceCatIndex].tasks[source.index]
+                categories[sourceCatIndex].tasks.splice(source.index, 1)
+                categories[destinationCatIndex].tasks.splice(destination.index, 0, task)
+            }
         }
     },
 })
 
 export default categorySlice.reducer;
-export const {addTask, updateTask, removeLastTask} = categorySlice.actions
+export const {addTask, updateTask, removeLastTask, dragTask} = categorySlice.actions

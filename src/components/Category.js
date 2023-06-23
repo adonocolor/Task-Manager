@@ -35,7 +35,7 @@ export const Category = ({id, title, color, tasks}) => {
                                 {
                                     tasks.map((task, index) => {
                                         return (
-                                            <Draggable draggableId={task.id} index={index} key={task.id}>
+                                            <Draggable draggableId={task.id} index={index} key={task.id} type="tasks">
                                                 {
                                                     (provided) => {
                                                         return (
