@@ -1,5 +1,3 @@
-// noinspection BadExpressionStatementJS
-
 import React from "react";
 import {Task} from "./Task";
 import '../styles/category.scss'
@@ -8,6 +6,13 @@ import {BucketIcon} from "./Icons";
 import {useDispatch} from "react-redux";
 import {removeLastTask} from "../data/redux/features/categorySlice";
 import {Draggable, Droppable} from "react-beautiful-dnd";
+
+const dragOver = (isDraggingover) => ({
+    background : isDraggingover ? "lightgrey" : "none",
+    margin: isDraggingover ? "3px 5px 0 5px" : "0",
+    padding: isDraggingover ? "1px" : "0",
+    transition: "all .2s ease-in-out",
+})
 
 export const Category = ({id, title, color, tasks}) => {
     const dispatch = useDispatch()
@@ -27,20 +32,22 @@ export const Category = ({id, title, color, tasks}) => {
             </div>
             <Droppable droppableId={id} type={"tasks"}>
                 {
-                    (provided) => {
+                    (provided, snapshot) => {
                         return (
                             <section {...provided.droppableProps}
                                      ref={provided.innerRef}
                                      className="tasks">
+                                <div style={dragOver(snapshot.isDraggingOver)}></div>
                                 {
                                     tasks.map((task, index) => {
                                         return (
                                             <Draggable draggableId={task.id} index={index} key={task.id} type="tasks">
                                                 {
-                                                    (provided) => {
+                                                    (provided, snapshot) => {
                                                         return (
-                                                            <div {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
-                                                                <Task {...task} key={task.id} color={color} categoryId={id} />
+                                                            <div {...provided.dragHandleProps} {...provided.draggableProps}  ref={provided.innerRef}>
+                                                                <Task {...task} key={task.id} drag={snapshot.isDragging} color={color} categoryId={id} />
+                                                                {provided.placeholder}
                                                             </div>
                                                             )
                                                     }

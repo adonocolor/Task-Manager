@@ -4,6 +4,11 @@ import {CommentIcon, FileIcon} from "./Icons";
 import {UpdateTaskForm} from "./Forms/UpdateTaskForm";
 import {employees} from "../data/data";
 
+const dragOverStyle = (isDragging) => ({
+    background: isDragging ? "#F4F5F5" : "none",
+    opacity: isDragging ? "0.6" : "1",
+})
+
 export function parseDate(string) {
     if (string === undefined) {
         return 'Без срока'
@@ -54,13 +59,13 @@ function checkFile(file) {
         return 1
 }
 
-export const Task = ({id, title, authors, date, categoryId, color, comment, file}) => {
+export const Task = ({id, title, authors, date, categoryId, color, comment, file, drag}) => {
     const [updateTaskModal, setUpdateTask] = useState(false)
 
     return (
         <>
             <div className='taskContainer'>
-                <article className='task' onClick={() => setUpdateTask(true)}>
+                <article className='task' style={dragOverStyle(drag)} onClick={() => setUpdateTask(true)}>
                     <div className='info'>
                         <h2 className="title">{title}</h2>
                         <p className='date' style={{background: color}}>{parseDate(date)}</p>
