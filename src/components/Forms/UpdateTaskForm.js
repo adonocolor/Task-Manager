@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {CrossIcon} from "../Icons";
 import { Form, TagPicker, DatePicker, InputPicker} from "rsuite";
 import {employees} from "../../data/data";
@@ -33,10 +33,15 @@ const disabledTaskStatusOptions = (array, status) => {
     return array.filter(item => !enabled.includes(item)).map(item => item.id)
 }
 
-export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId, id}) => {
+export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId, id, drag}) => {
     if (!open)
         return null
     else {
+        useEffect(() => {
+            if (drag) {
+                onClose()
+            }
+        });
         const model = SchemaModel({
             categories: NumberType().isRequired('У задачи должна быть категория!'),
         })
@@ -81,7 +86,7 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
         }
 
         return (
-            <div id="updateForm" className='updateFormContainer'>
+            <div className='updateFormContainer'>
                     <img src={Arrow} alt='arrowIcon'/>
                 <div className='updateTask'>
                     <div className='header'>
