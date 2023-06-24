@@ -16,14 +16,6 @@
   .task {
     transition: background .2s ease-in-out;
 
-    &:hover {
-      background: $hover;
-    }
-
-    &:active {
-      background: none;
-    }
-
     border: 1px lightgrey solid;
     margin: 5px 5px 0 5px;
     display: flex;

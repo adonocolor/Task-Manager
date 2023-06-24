@@ -4,8 +4,8 @@ import {CommentIcon, FileIcon} from "./Icons";
 import {UpdateTaskForm} from "./Forms/UpdateTaskForm";
 import {employees} from "../data/data";
 
-const dragOverStyle = (isDragging) => ({
-    background: isDragging ? "#F4F5F5" : "none",
+const dragOverStyle = (isDragging, isHover, isActive) => ({
+    background: isDragging ? "#F4F5F5" : isActive ? "none" : isHover ? "#F4F5F5" : "none",
     opacity: isDragging ? "0.6" : "1",
 })
 
@@ -61,11 +61,30 @@ function checkFile(file) {
 
 export const Task = ({id, title, authors, date, categoryId, color, comment, file, drag}) => {
     const [updateTaskModal, setUpdateTask] = useState(false)
+    const [isActive, setActive] = useState(false);
+    const [isHover, setHover] = useState(false);
+    const handleMouseEnter = () => {
+        setHover(true);
+    };
+    const handleMouseLeave = () => {
+        setHover(false);
+    };
+
+    const handleActiveUp = () => {
+        setActive(true);
+    };
+    const handleActiveDown = () => {
+        setActive(false);
+    };
 
     return (
         <>
             <div className='taskContainer'>
-                <article className='task' style={dragOverStyle(drag)} onClick={() => setUpdateTask(true)}>
+                <article className='task' style={dragOverStyle(drag, isHover, isActive)} onClick={() => setUpdateTask(true)}
+                         onMouseUp={handleActiveUp}
+                         onMouseDown={handleActiveDown}
+                         onMouseEnter={handleMouseEnter}
+                         onMouseLeave={handleMouseLeave}>
                     <div className='info'>
                         <h2 className="title">{title}</h2>
                         <p className='date' style={{background: color}}>{parseDate(date)}</p>
