@@ -63,28 +63,16 @@ export const Task = ({id, title, authors, date, categoryId, color, comment, file
     const [updateTaskModal, setUpdateTask] = useState(false)
     const [isActive, setActive] = useState(false);
     const [isHover, setHover] = useState(false);
-    const handleMouseEnter = () => {
-        setHover(true);
-    };
-    const handleMouseLeave = () => {
-        setHover(false);
-    };
-
-    const handleActiveUp = () => {
-        setActive(true);
-    };
-    const handleActiveDown = () => {
-        setActive(false);
-    };
-
     return (
         <>
             <div className='taskContainer'>
-                <article className='task' style={dragOverStyle(drag, isHover, isActive)} onClick={() => setUpdateTask(true)}
-                         onMouseUp={handleActiveUp}
-                         onMouseDown={handleActiveDown}
-                         onMouseEnter={handleMouseEnter}
-                         onMouseLeave={handleMouseLeave}>
+                <article className='task'
+                         style={dragOverStyle(drag, isHover, isActive)}
+                         onClick={() => setUpdateTask(true)}
+                         onMouseUp={() => setActive(true)}
+                         onMouseDown={() => setActive(false)}
+                         onMouseEnter={() => setHover(true)}
+                         onMouseLeave={() => setHover(false)}>
                     <div className='info'>
                         <h2 className="title">{title}</h2>
                         <p className='date' style={{background: color}}>{parseDate(date)}</p>
@@ -106,7 +94,15 @@ export const Task = ({id, title, authors, date, categoryId, color, comment, file
                 </span>
                     </div>
                 </article>
-                <UpdateTaskForm id={id} categoryId={categoryId} authors={authors} date={date} title={title} open={updateTaskModal} drag={drag} onClose={() => setUpdateTask(false)}/>
+                <UpdateTaskForm
+                    id={id}
+                    categoryId={categoryId}
+                    authors={authors}
+                    date={date}
+                    title={title}
+                    open={updateTaskModal}
+                    drag={drag}
+                    onClose={() => setUpdateTask(false)}/>
             </div>
         </>
     );
