@@ -6,7 +6,6 @@ import {employees} from "../data/data";
 
 const dragOverStyle = (isDragging, isHover, isActive) => ({
     background: isDragging ? "#E6F6F1" : isActive ? "none" : isHover ? "#F4F5F5" : "none",
-    opacity: isDragging ? "0.6" : "1",
     border: isDragging ? "2px #B5EADD solid" : "1px lightgrey solid",
 })
 
