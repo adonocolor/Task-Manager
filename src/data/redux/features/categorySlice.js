@@ -70,6 +70,10 @@ const categorySlice = createSlice({
             }
 
             if (task.categories !== undefined) {
+                task['categories'] = categoryIndex
+            }
+
+            if (task.categories !== categoryIndex) {
                 state.allCategories[categoryIndex].tasks.splice(taskIndex, 1)
                 const neededCategory = state.allCategories.indexOf(state.allCategories.find(item => item.id === task.categories))
                 delete task.categories

@@ -5,8 +5,9 @@ import {UpdateTaskForm} from "./Forms/UpdateTaskForm";
 import {employees} from "../data/data";
 
 const dragOverStyle = (isDragging, isHover, isActive) => ({
-    background: isDragging ? "#F4F5F5" : isActive ? "none" : isHover ? "#F4F5F5" : "none",
+    background: isDragging ? "#E6F6F1" : isActive ? "none" : isHover ? "#F4F5F5" : "none",
     opacity: isDragging ? "0.6" : "1",
+    border: isDragging ? "2px #B5EADD solid" : "1px lightgrey solid",
 })
 
 export function parseDate(string) {
