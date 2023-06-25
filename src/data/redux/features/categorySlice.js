@@ -69,17 +69,13 @@ const categorySlice = createSlice({
                 task['date'] = undefined
             }
 
-            if (task.categories !== undefined) {
-                task['categories'] = categoryIndex
-            }
-
-            if (task.categories !== categoryIndex) {
+            if (task.categories !== undefined && task.categories !== state.allCategories[categoryIndex].id) {
                 state.allCategories[categoryIndex].tasks.splice(taskIndex, 1)
                 const neededCategory = state.allCategories.indexOf(state.allCategories.find(item => item.id === task.categories))
                 delete task.categories
                 state.allCategories[neededCategory].tasks.push(task)
             } else {
-                state.allCategories[categoryIndex].tasks[taskIndex] = task
+                state.allCategories[categoryIndex].tasks.splice(taskIndex, 1, task)
             }
         },
         dragTask: (state, action) => {
