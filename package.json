@@ -1,11 +1,18 @@
 {
   "name": "task-manager",
+  "private": true,
   "version": "1.0.0",
+  "homepage": "https://AdoNoColor.github.io/Task-Manager",
+  "repository": {
+    "url": "https://github.com/AdoNoColor/Task-Manager.git"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +37,7 @@
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.1",
     "less": "^4.1.3",
     "less-loader": "^11.1.3",
