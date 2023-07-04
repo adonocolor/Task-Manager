@@ -2,7 +2,7 @@ import React from "react";
 import {Category} from "./Category";
 import '../styles/main.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {DragDropContext} from "react-beautiful-dnd";
+import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {dragTask} from "../data/redux/features/categorySlice";
 
 export const Board = () => {
@@ -15,15 +15,37 @@ export const Board = () => {
     return (
         <>
             <DragDropContext onDragEnd = {handleDragDrop}>
-                <div className="categories">
+                <Droppable droppableId='board' type='categories' direction='horizontal'>
                     {
-                        categories.map((status) => {
-                            return (
-                                <Category {...status}  key={status.id} />
-                            )
-                        })
+                    (provided, snapshot) => {
+                        return (
+                            <div {...provided.droppableProps}
+                                 ref={provided.innerRef}
+                                 className='categories'>
+                                {
+                                    categories.map((status, index) => {
+                                        return (
+                                            <Draggable draggableId={status.id} index={index} key={status.id} type='categories'>
+                                                {
+                                                    (provided, snapshot) => {
+                                                        return (
+                                                            <div {...provided.dragHandleProps}
+                                                                {...provided.draggableProps}
+                                                                ref={provided.innerRef}>
+                                                                <Category {...status}  key={status.id} />
+                                                            </div>
+                                                        )
+                                                    }
+                                                }
+                                            </Draggable>
+                                        )
+                                    })
+                                }
+                            </div>
+                        )
                     }
-                </div>
+                }
+                </Droppable>
             </DragDropContext>
         </>
     );
