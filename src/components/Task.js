@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import '../styles/task.scss'
 import {CommentIcon, FileIcon} from "./Icons";
-import {UpdateTaskForm} from "./Forms/UpdateTaskForm";
+import {UpdateTaskForm} from "./Forms/Task/UpdateTaskForm";
 import {employees} from "../data/data";
 
 const dragOverStyle = (isDragging, isHover, isActive) => ({

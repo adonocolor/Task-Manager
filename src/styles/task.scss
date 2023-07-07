@@ -1,5 +1,7 @@
 @import './colors';
 
+$taskTrans: background .2s ease-in-out;
+
 .taskContainer {
   position: relative;
   display: flex;
@@ -8,14 +10,14 @@
 }
 
 .tasks {
-  transition: background .2s ease-in-out;
+  transition: $taskTrans;
   display: flex;
   flex-direction: column;
   position: relative;
   height: 100%;
 
   .task {
-    transition: background .2s ease-in-out;
+    transition: $taskTrans;
 
     margin: 5px 5px 0 5px;
     display: flex;

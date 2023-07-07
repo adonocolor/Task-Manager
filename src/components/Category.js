@@ -37,6 +37,7 @@ export const Category = ({id, title, color, tasks}) => {
                         <BucketIcon/>
                     </button>
                 </div>
+                <UpdateCategoryForm open={open} id={id} title={title} color={color} onClose={() => isOpen(false)}/>
             </div>
             <Droppable droppableId={id} type={"tasks"}>
                 {

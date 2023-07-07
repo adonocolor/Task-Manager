@@ -1,13 +1,13 @@
 import React, {useRef, useState} from "react";
-import {employees} from "../../data/data";
-import '../../styles/addTask.scss'
-import {CrossIcon} from "../Icons";
+import {employees} from "../../../data/data";
+import '../../../styles/addTask.scss'
+import {CrossIcon} from "../../Icons";
 import {Button, Input, ButtonToolbar, Form, TagPicker, DatePicker, Uploader} from "rsuite";
-import '../../styles/rsuite.scss'
-import {inputStyle, labelStyle} from "./rsuiteStyles";
+import '../../../styles/rsuite.scss'
+import {inputStyle, labelStyle} from "../rsuiteStyles";
 import {SchemaModel, StringType} from "schema-typed";
 import {useDispatch} from "react-redux";
-import {addTask} from "../../data/redux/features/categorySlice";
+import {addTask} from "../../../data/redux/features/categorySlice";
 
 const Textarea = React.forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 

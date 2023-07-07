@@ -4,30 +4,30 @@
   position: absolute;
   z-index: 3;
   width: 350px;
-  top: calc(100% + 10px);
 
-  .arrowUp {
-    width: 0;
-    height: 0;
-    border-top: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 12px solid lightgrey;
-    margin-left: 10px;
-    margin-bottom: 0;
-    position: relative;
-    top: 1px;
+  &--category {
+    top: 10%;
   }
 
-  img {
+  &--task {
+    top: calc(100% + 10px);
+  }
+
+  .arrow {
     height: 12px;
     width: 24px;
     position: absolute;
     top: -10px;
-    margin-left: 10px;
+
+    &--task {
+      margin-left: 10px;
+    }
+    &--category {
+      margin-left: 280px;
+    }
   }
 
-  .updateTask {
+  .updateForm {
     background: white;
     box-shadow: $updateShadow;
     display: flex;
@@ -42,6 +42,11 @@
     .header {
       display: flex;
       align-items: baseline;
+
+      &--category {
+        flex-direction: row-reverse;
+      }
+
       justify-content: space-between;
       margin: 0 0 16px 0;
       padding: 0;

@@ -1,15 +1,15 @@
 import React, {useEffect, useRef, useState} from "react";
-import {CrossIcon} from "../Icons";
+import {CrossIcon} from "../../Icons";
 import { Form, TagPicker, DatePicker, InputPicker} from "rsuite";
-import {employees} from "../../data/data";
-import '../../styles/updateTask.scss'
-import '../../styles/rsuite.scss'
-import '../../data/data'
-import {inputStyle, formGroupStyle, renderCategoryItem, datePickerLocale} from "./rsuiteStyles";
-import {parseDate} from "../Task";
-import Arrow from '../../styles/svg/arrowIcon.svg';
+import {employees} from "../../../data/data";
+import '../../../styles/updateTask.scss'
+import '../../../styles/rsuite.scss'
+import '../../../data/data'
+import {inputStyle, formGroupStyle, renderCategoryItem, datePickerLocale} from "../rsuiteStyles";
+import {parseDate} from "../../Task";
+import Arrow from '../../../styles/svg/arrowIcon.svg';
 import {useDispatch, useSelector} from "react-redux";
-import {updateTask} from "../../data/redux/features/categorySlice";
+import {updateTask} from "../../../data/redux/features/categorySlice";
 import {NumberType, SchemaModel} from "schema-typed";
 
 const disabledTaskStatusOptions = (array, status) => {
@@ -86,9 +86,9 @@ export const UpdateTaskForm = ({open, onClose, title, authors, date, categoryId,
         }
 
         return (
-            <div className='updateFormContainer'>
-                    <img src={Arrow} alt='arrowIcon'/>
-                <div className='updateTask'>
+            <div className='updateFormContainer updateFormContainer--task'>
+                    <img className='arrow arrow--task' src={Arrow} alt='arrowIcon'/>
+                <div className='updateForm'>
                     <div className='header'>
                         <p>{title}</p>
                         <button className='closeFormButton'
