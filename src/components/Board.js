@@ -3,13 +3,18 @@ import {Category} from "./Category";
 import '../styles/main.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
-import {dragTask} from "../data/redux/features/categorySlice";
+import {dragCategory, dragTask} from "../data/redux/features/categorySlice";
 
 export const Board = () => {
     const categories = useSelector(store => store.categorySlice.allCategories)
     const dispatch  = useDispatch()
     const handleDragDrop = (results) => {
-        dispatch(dragTask(results))
+        if (results.type === 'tasks') {
+            dispatch(dragTask(results))
+        }
+        if (results.type === 'categories') {
+            dispatch(dragCategory(results))
+        }
     }
 
     return (
@@ -33,6 +38,7 @@ export const Board = () => {
                                                                 {...provided.draggableProps}
                                                                 ref={provided.innerRef}>
                                                                 <Category {...status}  key={status.id} />
+                                                                {provided.placeholder}
                                                             </div>
                                                         )
                                                     }
@@ -41,6 +47,7 @@ export const Board = () => {
                                         )
                                     })
                                 }
+                                {provided.placeholder}
                             </div>
                         )
                     }

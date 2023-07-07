@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import {Task} from "./Task";
 import '../styles/category.scss'
 import '../data/data'
-import {BucketIcon} from "./Icons";
+import {BucketIcon, PencilIcon} from "./Icons";
 import {useDispatch} from "react-redux";
 import {removeLastTask} from "../data/redux/features/categorySlice";
 import {Draggable, Droppable} from "react-beautiful-dnd";
+import {UpdateCategoryForm} from "./Forms/Category/UpdateCategoryForm";
 
 const dragOver = (isDraggingover) => ({
     background : isDraggingover ? "lightgrey" : "none",
@@ -15,6 +16,7 @@ const dragOver = (isDraggingover) => ({
 })
 
 export const Category = ({id, title, color, tasks}) => {
+    const [open, isOpen] = useState(false);
     const dispatch = useDispatch()
     return (
         <div className="category">
@@ -25,6 +27,12 @@ export const Category = ({id, title, color, tasks}) => {
                 </div>
 
                 <div className='buttons'>
+                    <button
+                        type="button"
+                        className="button"
+                        onClick={() => isOpen(true)}>
+                        <PencilIcon/>
+                    </button>
                     <button type="button" className="button" onClick={() => {dispatch(removeLastTask(id))}}>
                         <BucketIcon/>
                     </button>
