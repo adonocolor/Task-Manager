@@ -16,9 +16,6 @@ export const UpdateCategoryForm = ({open, onClose, title, color, categoryId, id,
                 onClose()
             }
         });
-        const model = SchemaModel({
-            title: StringType().isRequired('У задачи должна быть категория!'),
-        })
 
         const dispatch = useDispatch()
         const formRef = useRef();
