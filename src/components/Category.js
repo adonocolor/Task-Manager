@@ -15,7 +15,7 @@ const dragOver = (isDraggingover) => ({
     transition: "all .2s ease-in-out",
 })
 
-export const Category = ({id, title, color, tasks}) => {
+export const Category = ({id, title, color, tasks, drag}) => {
     const [open, isOpen] = useState(false);
     const dispatch = useDispatch()
     return (
@@ -37,7 +37,7 @@ export const Category = ({id, title, color, tasks}) => {
                         <BucketIcon/>
                     </button>
                 </div>
-                <UpdateCategoryForm open={open} id={id} title={title} color={color} onClose={() => isOpen(false)}/>
+                <UpdateCategoryForm open={open} id={id} title={title} color={color} drag={drag} onClose={() => isOpen(false)}/>
             </div>
             <Droppable droppableId={id} type={"tasks"}>
                 {

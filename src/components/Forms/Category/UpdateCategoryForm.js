@@ -6,7 +6,7 @@ import {Form} from "rsuite";
 import {inputStyle, labelStyle} from "../rsuiteStyles";
 import {ColorPicker} from "primereact/colorpicker";
 import "primereact/resources/primereact.min.css"
-export const UpdateCategoryForm = ({open, onClose, title, color, categoryId, id, drag}) => {
+export const UpdateCategoryForm = ({open, onClose, title, color, id, drag}) => {
     if (!open)
         return null
     else {

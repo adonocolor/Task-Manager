@@ -37,7 +37,7 @@ export const Board = () => {
                                                             <div {...provided.dragHandleProps}
                                                                 {...provided.draggableProps}
                                                                 ref={provided.innerRef}>
-                                                                <Category {...status}  key={status.id} />
+                                                                <Category {...status}  drag={snapshot.isDragging} key={status.id} />
                                                                 {provided.placeholder}
                                                             </div>
                                                         )
