@@ -113,7 +113,14 @@ const categorySlice = createSlice({
                 category.title = form.title;
             }
 
-            category.color = form.color;
+            if (form.color !== undefined) {
+                if (form.color[0] !== '#') {
+                    let hex = '#'
+                    form.color = hex.concat(form.color);
+                    category.color = form.color;
+                }
+            }
+
             state.allCategories.splice(index, 1, category);
         },
     }
