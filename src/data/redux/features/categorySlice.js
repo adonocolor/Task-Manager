@@ -95,15 +95,29 @@ const categorySlice = createSlice({
         },
         dragCategory: (state, action) => {
             const {source, destination} = action.payload;
-            console.log(source.index + ' '+ destination.index)
             if (!destination) return;
             if (source.droppableId === destination.droppableId && source.index === destination.index) return;
             let category = state.allCategories[source.index];
             state.allCategories.splice(source.index, 1);
             state.allCategories.splice(destination.index, 0, category);
-        }
-    },
+        },
+        updateCategory: (state, action) => {
+            const form = action.payload
+            const id = form.id;
+            delete form.id;
+
+            const category = state.allCategories.find(item => item.id === id);
+            let index = state.allCategories.indexOf(category)
+
+            if (form.title !== undefined && form.title !== '') {
+                category.title = form.title;
+            }
+
+            category.color = form.color;
+            state.allCategories.splice(index, 1, category);
+        },
+    }
 })
 
 export default categorySlice.reducer;
-export const {addTask, updateTask, removeLastTask, dragTask, dragCategory} = categorySlice.actions
+export const {addTask, updateTask, removeLastTask, dragTask, dragCategory, updateCategory} = categorySlice.actions
