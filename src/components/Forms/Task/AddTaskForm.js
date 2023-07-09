@@ -37,6 +37,7 @@ export const AddTaskForm = ({open, onClose}) => {
             }
 
             dispatch(addTask(formData))
+            onClose()
         }
 
         const model = SchemaModel({
