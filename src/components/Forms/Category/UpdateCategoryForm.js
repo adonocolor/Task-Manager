@@ -36,12 +36,6 @@ export const UpdateCategoryForm = ({open, onClose, title, color, id, drag}) => {
                 return;
             }
 
-
-            if (formData.color[0] !== '#' && formData.color !== undefined) {
-                let hex = '#'
-                formData.color = hex.concat(formData.color)
-            }
-
             formData['id'] = id;
 
             dispatch(updateCategory(formData))

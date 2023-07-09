@@ -12,7 +12,7 @@ body {
   display: flex;
   justify-content: flex-start;
   gap: 10px;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 button {
@@ -31,15 +31,27 @@ button {
 }
 
 .addButton {
-  position: absolute;
-  bottom: 2vh;
-  right: 2vh;
-  padding: 5px;
-  border-radius: 5px;
-  background: $grey;
-  max-width: 64px;
-  max-height: 64px;
-  transition: box-shadow .2s ease-in-out;
+
+  &--category {
+    background: none;
+    max-width: 64px;
+    max-height: 64px;
+  }
+
+  &--task {
+    position: absolute;
+    bottom: 2vh;
+    right: 2vh;
+    padding: 5px;
+    border-radius: 5px;
+    background: $grey;
+    max-width: 64px;
+    max-height: 64px;
+    transition: box-shadow .2s ease-in-out;
+    &:hover {
+      box-shadow: $shadow;
+    }
+  }
 
   svg {
     background: none;
@@ -47,10 +59,6 @@ button {
     color: grey;
     width: 32px;
     height: 32px;
-  }
-
-  &:hover {
-    box-shadow: $shadow;
   }
 
   svg:hover {

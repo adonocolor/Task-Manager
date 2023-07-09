@@ -4,6 +4,7 @@ import '../styles/main.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {DragDropContext, Draggable, Droppable} from "react-beautiful-dnd";
 import {dragCategory, dragTask} from "../data/redux/features/categorySlice";
+import {AddCategoryIcon} from "./Icons";
 
 export const Board = () => {
     const categories = useSelector(store => store.categorySlice.allCategories)
@@ -30,24 +31,33 @@ export const Board = () => {
                                 {
                                     categories.map((status, index) => {
                                         return (
-                                            <Draggable draggableId={status.id} index={index} key={status.id} type='categories'>
-                                                {
-                                                    (provided, snapshot) => {
-                                                        return (
-                                                            <div {...provided.dragHandleProps}
-                                                                {...provided.draggableProps}
-                                                                ref={provided.innerRef}>
-                                                                <Category {...status}  drag={snapshot.isDragging} key={status.id} />
-                                                                {provided.placeholder}
-                                                            </div>
-                                                        )
+                                            <>
+                                                <Draggable draggableId={status.id} index={index} key={status.id} type='categories'>
+                                                    {
+                                                        (provided, snapshot) => {
+                                                            return (
+                                                                <div {...provided.dragHandleProps}
+                                                                     {...provided.draggableProps}
+                                                                     ref={provided.innerRef}>
+                                                                    <Category {...status}  drag={snapshot.isDragging} key={status.id} />
+                                                                    {provided.placeholder}
+                                                                </div>
+                                                            )
+                                                        }
                                                     }
-                                                }
-                                            </Draggable>
+                                                </Draggable>
+                                            </>
                                         )
                                     })
                                 }
                                 {provided.placeholder}
+                                <div className="category">
+                                    <div className="header">
+                                        <button className='addButton addButton--category'>
+                                            <AddCategoryIcon />
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         )
                     }

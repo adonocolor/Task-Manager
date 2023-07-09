@@ -7,7 +7,7 @@ export const AddTaskModal = () => {
     const [openModal, setModal] = useState(false)
     return createPortal(
         <div className='addButtonCtr'>
-            <button className='addButton' onClick={() => setModal(true)}>
+            <button className='addButton addButton--task' onClick={() => setModal(true)}>
                 <AddIcon />
             </button>
             <AddTaskForm open={openModal} onClose={() => {
